@@ -7,11 +7,6 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
     public List<ItemManger> selectedGroup = new List<ItemManger>();
 
-    private ItemManger[] jointItems;
-
-    public GameObject currentItem;
-
-    public GameObject parentObj;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,14 +15,12 @@ public class GameManager : MonoBehaviour
             Instance = this;
         }
     }
-
    
   
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
         if (Input.GetMouseButtonDown(0))
-
         {
             //Get the mouse position on the screen and send a raycast into the game world from that position.
             Vector2 worldPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -37,11 +30,28 @@ public class GameManager : MonoBehaviour
             if (hit.collider != null)
             {
                 Debug.Log(hit.collider.name);
-                if (hit.collider != null && hit.collider.GetComponent<ItemManger>() != null)
+
+                ItemManger tapItem = hit.collider.GetComponent<ItemManger>();
+                if (tapItem != null)
                 {
                     selectedGroup.Clear();
-                    hit.collider.GetComponent<ItemManger>().CheckNearItem();
-                    selectedGroup.Add(hit.collider.GetComponent<ItemManger>());
+                    tapItem.CheckNearItem(tapItem.currentItemId);
+
+                    // selectedGroup.Add(tapItem);
+                    if (selectedGroup.Count > 1)
+                    {
+                        foreach (var item in selectedGroup)
+                        {
+                            Destroy(item.gameObject);
+                        }
+                        selectedGroup.Clear();
+                    }
+                    else
+                    {
+                        selectedGroup[0].isGrouped = false;
+                        selectedGroup[0].isChecked = false;
+                        selectedGroup.Clear();
+                    }
                 }
             }
         }

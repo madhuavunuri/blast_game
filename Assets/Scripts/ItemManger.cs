@@ -49,4 +49,10 @@ public class ItemManger: MonoBehaviour
         for (int i = 0; i < _nearColliders.Count; i++)
             _nearColliders[i].GetComponent<ItemManger>().CheckNearItem(type);
     }
+
+    public void SetToBombRed()
+    {
+        currentItemId = ItemType.NONE;
+        elementType = ElementType.BIRD_RED;
+    }
 }

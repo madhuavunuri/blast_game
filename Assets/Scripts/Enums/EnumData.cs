@@ -2,7 +2,9 @@ public enum ElementType
 {
     NONE,
     ITEM,
-    BOMB,
+    BIRD_RED,
+    BIRD_CHUCK,
+    BIRD_BOMB,
     TNT,
     ICEBLOCK,
     WOODBLOCK
@@ -14,11 +16,6 @@ public enum ItemType
     GREEN,
     PURPLE,
     ORANGE,
-    ROSE
-}
-public enum BombType
-{
-    BIRD_RED,
-    BIRD_CHUCK,
-    BIRD_BOMB
+    ROSE,
+    NONE
 }

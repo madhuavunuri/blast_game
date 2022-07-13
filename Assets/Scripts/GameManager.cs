@@ -40,10 +40,15 @@ public class GameManager : MonoBehaviour
                     // selectedGroup.Add(tapItem);
                     if (selectedGroup.Count > 1)
                     {
+                       
+                        if(selectedGroup.Count > 3)
+                            tapItem.SetToBombRed();
+
+                        selectedGroup.Remove(selectedGroup[0]);
+
                         foreach (var item in selectedGroup)
-                        {
                             Destroy(item.gameObject);
-                        }
+
                         selectedGroup.Clear();
                     }
                     else
